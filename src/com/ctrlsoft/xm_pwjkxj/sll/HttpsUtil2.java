@@ -11,6 +11,9 @@ import android.content.Context;
 import com.ctrlsoft.xm_pwjkxj.util.LogUtil;
 import com.squareup.okhttp.OkHttpClient;
 
+/**
+ * OkHttpClient
+ */
 public class HttpsUtil2 {
 
 	public static OkHttpClient getSslHttpClient(Context pContext) {
@@ -21,7 +24,7 @@ public class HttpsUtil2 {
 		try {
 
 			SSLContext sc = SSLContextUtil.setCertificate(pContext);
-//			mOkHttpClient.setSslSocketFactory(sc.getSocketFactory());
+			// mOkHttpClient.setSslSocketFactory(sc.getSocketFactory());
 			mOkHttpClient.setSslSocketFactory(new Tls12SocketFactory(sc
 					.getSocketFactory()));
 			HostnameVerifier DO_NOT_VERIFY = new HostnameVerifier() {

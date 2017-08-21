@@ -11,6 +11,9 @@ import android.content.Context;
 
 import com.ctrlsoft.xm_pwjkxj.util.LogUtil;
 
+/**
+ * HttpsURLConnection
+ */
 public class HttpsUtil {
 
 	public static HttpsURLConnection getHttpsURLConnection(Context mcontext,
