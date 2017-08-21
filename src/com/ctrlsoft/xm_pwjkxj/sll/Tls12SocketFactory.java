@@ -9,7 +9,8 @@ import javax.net.ssl.SSLSocket;
 import javax.net.ssl.SSLSocketFactory;
 
 public class Tls12SocketFactory extends SSLSocketFactory {
-	private static final String[] TLS_SUPPORT_VERSION = { "TLSv1.1", "TLSv1.2" };
+	private static final String[] TLS_SUPPORT_VERSION = { "TLSv1", "TLSv1.1",
+			"TLSv1.2" };
 
 	final SSLSocketFactory delegate;
 
