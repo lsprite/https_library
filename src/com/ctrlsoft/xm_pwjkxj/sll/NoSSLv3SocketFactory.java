@@ -17,6 +17,8 @@ import javax.net.ssl.SSLSession;
 import javax.net.ssl.SSLSocket;
 import javax.net.ssl.SSLSocketFactory;
 
+import com.ctrlsoft.xm_pwjkxj.util.LogUtil;
+
 public class NoSSLv3SocketFactory extends SSLSocketFactory {
 	private final SSLSocketFactory delegate;
 
@@ -91,9 +93,9 @@ public class NoSSLv3SocketFactory extends SSLSocketFactory {
 						Arrays.asList(delegate.getEnabledProtocols()));
 				if (enabledProtocols.size() > 1) {
 					enabledProtocols.remove("SSLv3");
-					System.out.println("Removed SSLv3 from enabled protocols");
+					LogUtil.e("Removed SSLv3 from enabled protocols");
 				} else {
-					System.out.println("SSL stuck with protocol available for "
+					LogUtil.e("SSL stuck with protocol available for "
 							+ String.valueOf(enabledProtocols));
 				}
 				protocols = enabledProtocols
