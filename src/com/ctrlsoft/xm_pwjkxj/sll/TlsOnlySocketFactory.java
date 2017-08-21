@@ -36,6 +36,7 @@ import com.ctrlsoft.xm_pwjkxj.util.LogUtil;
  */
 public class TlsOnlySocketFactory extends SSLSocketFactory {
 	private static final String[] TLS_SUPPORT_VERSION = { "TLSv1.2" };
+
 	private static final int HANDSHAKE_TIMEOUT = 0;
 	private static final String TAG = "TlsOnlySocketFactory";
 	private final SSLSocketFactory delegate;
@@ -77,7 +78,7 @@ public class TlsOnlySocketFactory extends SSLSocketFactory {
 		if (socket instanceof SSLSocket) {
 			TlsOnlySSLSocket tempSocket = new TlsOnlySSLSocket(
 					(SSLSocket) socket, compatible);
-
+			tempSocket.setEnabledCipherSuites(TLS_SUPPORT_VERSION);
 			if (delegate instanceof SSLCertificateSocketFactory
 					&& Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR1) {
 				((android.net.SSLCertificateSocketFactory) delegate)
@@ -122,13 +123,6 @@ public class TlsOnlySocketFactory extends SSLSocketFactory {
 		return makeSocketSafe(
 				delegate.createSocket(address, port, localAddress, localPort),
 				address.getHostName());
-	}
-
-	private Socket patch(Socket s) {
-		if (s instanceof SSLSocket) {
-			((SSLSocket) s).setEnabledProtocols(TLS_SUPPORT_VERSION);
-		}
-		return s;
 	}
 
 	private class TlsOnlySSLSocket extends DelegateSSLSocket {
